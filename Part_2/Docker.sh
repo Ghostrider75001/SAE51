@@ -1,3 +1,5 @@
+#!/bin/bash
+"
 # Add Docker's official GPG key:
 sudo apt-get update
 sudo apt-get install ca-certificates curl
@@ -11,3 +13,26 @@ echo \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
+
+# Install docker
+sudo apt install -y docker.io
+sudo apt install docker-compose
+sudo groupadd docker
+sudo usermod -aG docker $USER
+sudo groupadd docker-compose
+sudo usermod -aG docker-compose $USER
+"
+# Redémarrer le système (Nécessaire)
+
+read -p "Voulez-vous reboot le système ? (Y/N): " confirmation
+
+# Confirmation
+if [[ "$confirmation" == "oui" || "$confirmation" == "Oui" ||"$confirmation" == "OUI" || "$confirmation" == "o" ||"$confirmation" == "O" || "$confirmation" == "Yes" || "$confirmation" == "YES" || "$confirmation" == "yes" || "$confirmation" == "y" || "$confirmation" == "Y" ]]; then
+	echo "Redémarrage..."
+	sudo shutdown -r now
+elif
+	[[ "$confirmation" == "o" ]]; then
+	sudo shutdown -r now
+else
+	echo "Redémarrage annulé..."
+fi
